@@ -32,7 +32,7 @@ const FluxScreen = props => {
     ActionSheet.show(
       {options: BUTTONS, cancelButtonIndex: 2, title: 'Choisir une photo'},
       async buttonIndex => {
-        props.navigation.navigate('PublicationScreen')
+        props.navigation.navigate('PublicationScreen', {pickedimage: pickedImage})
         switch (buttonIndex) {
           case 0:
             const hasPermission = await verifyPermissions;
@@ -44,8 +44,8 @@ const FluxScreen = props => {
               allowsEditing: false,
               quality: 1
             });
-
             setPickedImage(image.uri)
+
             break;
           case 1:
             const hasPermission1 = await verifyPermissions;
@@ -66,7 +66,7 @@ const FluxScreen = props => {
       <View>
         <View style={styles.imagePicker}>
           <View style={styles.imagePreview}>
-            <Image style={styles.imagePhoto} source={{uri: pickedImage}}/>
+            <Image style={styles.imagePhoto}/>
             <TouchableOpacity
               style={styles.bouton_photo}
               onPress={takeImageHandler}

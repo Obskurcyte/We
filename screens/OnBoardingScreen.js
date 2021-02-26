@@ -42,7 +42,7 @@ const OnboardingScreen = () => {
             title="Participez à l'exposition mondiale pour l'égalité des femmes"
             soustitle="Une expérience artistique pour soutenir l'égalité des femmes"
             undertitle="Démarrer"
-            handlePage={() => navigation.navigate('FluxScreen')}
+            handlePage={() => navigation.navigate('RecapScreenPubli')}
           />
         </View>
       </ViewPager>

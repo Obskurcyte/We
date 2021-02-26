@@ -16,56 +16,16 @@ const PublicationScreen = props => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [pickedImage, setPickedImage] = useState('')
 
-  const verifyPermissions = async () => {
-    const result = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    if (result.status !== 'granted') {
-      Alert.alert("Vous n'avez pas la permission !")
-      return false;
-    }
-    return true;
-  }
+  const pickedimage = props.route.params.pickedimage;
 
-  const takeImageHandler = async () => {
-    const BUTTONS = ['Prendre une photo', 'Choisir une photo de la galerie', 'Annuler'];
-    ActionSheet.show(
-      {options: BUTTONS, cancelButtonIndex: 2, title: 'Choisir une photo'},
-      async buttonIndex => {
-        switch (buttonIndex) {
-          case 0:
-            const hasPermission = await verifyPermissions;
-            if (!hasPermission) {
-              return;
-            }
-            const image = await ImagePicker.launchCameraAsync({
-              aspect: [1, 1],
-              allowsEditing: false,
-              quality: 1
-            });
-
-            setPickedImage(image.uri)
-            break;
-          case 1:
-            const hasPermission1 = await verifyPermissions;
-            if (!hasPermission1) {
-              return;
-            }
-            const image1 = await ImagePicker.launchImageLibraryAsync({
-              aspect: [1, 1],
-              allowsEditing: false,
-              quality: 1
-            });
-            setPickedImage(image1.uri)
-        }
-      })}
-
+  console.log(pickedimage)
   return (
     <Root>
       <View>
         <View style={styles.imagePicker}>
           <View style={styles.imagePreview}>
-            <Image style={styles.imagePhoto} source={{uri: pickedImage}}/>
+            <Image style={styles.imagePhoto} source={{uri: pickedimage}}/>
           </View>
         </View>
       </View>
